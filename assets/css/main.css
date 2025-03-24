@@ -1,0 +1,7 @@
+@tailwind components;
+
+@layer components {
+  .container-fluid {
+    @apply container max-w-screen-2xl;
+  }
+}
