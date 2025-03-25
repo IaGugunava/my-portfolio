@@ -1,5 +1,21 @@
 <script setup lang="ts">
 
+const supabase = useSupabaseClient();
+
+const skills = ref();
+
+const fetchSkills = async () => {
+    const { data, error } = await supabase.from('technologies').select('*');
+
+    if(!error){
+        skills.value = data;
+    } else {
+        console.log(error)
+    }
+
+    console.log(skills.value, '~~~~~~~~~~~~~~~~~~~~')
+}
+
 </script>
 
 <template>
