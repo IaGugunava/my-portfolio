@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
-const supabase = useSupabaseClient();
+const supabaseClient = useSupabaseClient();
 
 const skills = ref();
 
 const fetchSkills = async () => {
-    const { data, error } = await supabase.from('technologies').select('*');
+    const { data, error } = await supabaseClient.from('technologies').select('*');
 
     if(!error){
         skills.value = data;
@@ -13,16 +13,22 @@ const fetchSkills = async () => {
         console.log(error)
     }
 
-    console.log(skills.value, '~~~~~~~~~~~~~~~~~~~~')
 }
+
+fetchSkills()
 
 </script>
 
 <template>
-    <div class="container-fluid py-20 bg-dark flex items-center justify-center">
+    <div class="container-fluid py-20 bg-dark items-center flex flex-col gap-8 justify-center">
         <h2 class="font-semibold text-4xl text-white w-fit">My Skills</h2>
 
-        <!-- <div class="flex flex-wrap "></div> -->
+        <div class="grid gap-6 grid-cols-8 w-full" >
+            <div v-for="item in skills" :key="item?.id" class="flex flex-col gap-2 items-center justify-center ">
+                <div class="[&_svg]:w-6 [&_svg]:h-6" v-html="item?.image"></div>
+                <p class="text-white">{{ item?.name }}</p>
+            </div>
+        </div>
     </div>
 </template>
 
