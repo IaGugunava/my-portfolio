@@ -20,11 +20,15 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    supabaseKey: process.env.NUXT_SUPABASE_KEY,
     public: {
       supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL,
+      supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY,
     }
   },
+
+  supabase: {
+    redirect: false
+    },
 
   components: [{ path: "./components", pathPrefix: false }],
 })
