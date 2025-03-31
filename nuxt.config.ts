@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/supabase',
+    'nuxt-swiper',
   ],
 
   css: ["~/assets/css/main.css"],
@@ -24,6 +25,9 @@ export default defineNuxtConfig({
       supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL,
       supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY,
     }
+  },
+  
+  swiper: {
   },
 
   supabase: {
