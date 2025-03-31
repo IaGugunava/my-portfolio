@@ -1,6 +1,7 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   data: any;
+  technologies?: any;
 }>();
 </script>
 
@@ -13,7 +14,14 @@ const props = defineProps<{
           class="aspect-[351/216] w-full object-cover transition-all duration-500 ease-in-out lg:aspect-[542/300] 2xl:aspect-[778/456]"
         />
     </div>
-    <h3>{{ data?.name }}</h3>
+    <div>
+      <h3 class="text-xl text-dark mt-5 ml-5 mb-5">{{ data?.name }}</h3>
+      <div v-if="technologies?.length">
+        <div v-for="(item, index) in technologies" :key="index">
+          {{ item }}
+        </div>
+      </div>
+    </div>
   </NuxtLink>
 </template>
 
