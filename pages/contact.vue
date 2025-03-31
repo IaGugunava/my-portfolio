@@ -4,7 +4,7 @@
 
 <template>
     <div>
-        contact
+        <Contact/>
     </div>
 </template>
 

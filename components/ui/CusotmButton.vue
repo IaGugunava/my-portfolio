@@ -23,7 +23,7 @@ withDefaults(
 );</script>
 
 <template>
-    <button class=" px-6 py-3 rounded-lg  text-lg font-semibold transition-all duration-300 ease-in-out"
+    <button class=" px-6 py-3 rounded-lg text-lg font-semibold transition-all duration-300 ease-in-out"
     :class="{
         'bg-primary text-white hover:bg-primary-dark ': type === 1,
         'border border-white font-semibold text-white hover:bg-white hover:text-gray-900': type === 2,

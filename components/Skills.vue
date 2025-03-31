@@ -24,9 +24,11 @@ fetchSkills()
         <h2 class="font-semibold text-4xl text-white w-fit">My Skills</h2>
 
         <div class="grid gap-6 grid-cols-8 w-full" >
-            <div v-for="item in skills" :key="item?.id" class="flex flex-col gap-2 items-center justify-center ">
-                <div class="[&_svg]:w-6 [&_svg]:h-6" v-html="item?.image"></div>
-                <p class="text-white">{{ item?.name }}</p>
+            <div v-for="item in skills" :key="item?.id">
+                <NuxtLink :to="item?.link ? item?.link : '#'" class="flex flex-col gap-2 items-center justify-center">
+                    <div class="[&_svg]:w-10 [&_svg]:h-10" v-html="item?.image"></div>
+                    <p class="text-white">{{ item?.name }}</p>
+                </NuxtLink>
             </div>
         </div>
     </div>
