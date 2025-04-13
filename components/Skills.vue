@@ -8,7 +8,7 @@ const fetchSkills = async () => {
     const { data, error } = await supabaseClient.from('technologies').select('*');
 
     if(!error){
-        skills.value = data;
+        skills.value = data?.slice(0, 16);
     } else {
         console.log(error)
     }
