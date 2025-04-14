@@ -3,7 +3,9 @@ const colors = {
   dark: "#050105",
   primary: "#6A0572",
   "primary-light": '#861A88',
-  "primary-dark": "#5A0460"
+  "primary-dark": "#5A0460",
+  "primary-subtle": "#6623751a",
+  "gray-dark": "#312f33"
 };
 export default {
   content: [],
