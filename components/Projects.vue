@@ -4,23 +4,47 @@ const supabaseClient = useSupabaseClient();
 const containerRef = ref(null);
 
 const projects = ref();
+const technologies = ref();
 // const personalProjects = ref();
 // const otherProjects = ref();
 // const projectState = ref(false);
 // const chosenProjects = ref();
 
-
 const fetchProjects = async () => {
-  const { data, error } = await supabaseClient.from("projects").select("*");
-
+  const { data, error } = await supabaseClient.from("projects").select(`
+    id,
+    name,
+    image,
+    link,
+    technologies ( id, name )
+  `);
   if (!error) {
     projects.value = data;
   } else {
     console.log(error);
   }
 
-  // filterProjects()
+  console.log(projects.value, "~~~~~~~~~~~~~~~~~~~~~~~~~");
+
 };
+
+// const fetchTechProjects = async () => {
+//   const { data, error } = await supabaseClient.from("projects").select(`
+//   id,
+//   name,
+//   image,
+//   link,
+//   technologies ( id, name )
+// `);
+
+//   if (!error) {
+//     technologies.value = data;
+//   } else {
+//     console.log(error);
+//   }
+
+//   console.log(technologies.value, "~~~~~~~~~~~~~~~~~~~~~~~~");
+// };
 
 // const changeProjectType = () => {
 //   projectState.value = !projectState.value;
@@ -32,9 +56,10 @@ const fetchProjects = async () => {
 // }
 
 fetchProjects();
+// fetchTechProjects();
 
 // watch(projectState, () => {
-//   projectState.value ? (chosenProjects.value = personalProjects.value) : (chosenProjects.value = otherProjects.value) 
+//   projectState.value ? (chosenProjects.value = personalProjects.value) : (chosenProjects.value = otherProjects.value)
 // }, {
 //   immediate: true
 // })
@@ -56,41 +81,38 @@ fetchProjects();
         </div> -->
       </div>
     </div>
-    <div class="">
-      <swiper-container
-        class="!overflow-visible"
-        ref="containerRef"
-        :breakpoints="{
-          0: {
-            spaceBetween: 24,
-            slidesPerView: 1.09,
-          },
+    <swiper-container
+      class="!overflow-visible"
+      ref="containerRef"
+      :breakpoints="{
+        0: {
+          spaceBetween: 24,
+          slidesPerView: 1.09,
+        },
+        480: {
+          spaceBetween: 24,
+          slidesPerView: 1.4,
+        },
+        768: {
+          spaceBetween: 16,
+          slidesPerView: 2.2,
+        },
+        1024: {
+          spaceBetween: 36,
+          slidesPerView: 2.5,
+        },
 
-          480: {
-            spaceBetween: 24,
-            slidesPerView: 1.4,
-          },
-          768: {
-            spaceBetween: 16,
-            slidesPerView: 2.2,
-          },
-          1024: {
-            spaceBetween: 36,
-            slidesPerView: 2.5,
-          },
-
-          1280: {
-            spaceBetween: 36,
-            slidesPerView: 3,
-          },
-        }"
-        :speed="1000"
+      }"
+      :speed="1000"
+    >
+      <swiper-slide
+        v-show="item?.image"
+        v-for="item in projects"
+        :key="item?.id"
       >
-        <swiper-slide v-show="item?.image" v-for="item in projects" :key="item?.id">
-          <Card :data="item" />
-        </swiper-slide>
-      </swiper-container>
-    </div>
+        <Card :data="item" />
+      </swiper-slide>
+    </swiper-container>
   </div>
 </template>
 

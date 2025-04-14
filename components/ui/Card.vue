@@ -1,8 +1,9 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   data: any;
-  technologies?: any;
 }>();
+
+const technologies = computed(() => props?.data?.technologies?.slice(0, 3))
 </script>
 
 <template>
@@ -15,10 +16,11 @@ defineProps<{
         />
     </div>
     <div>
-      <h3 class="text-xl text-dark mt-5 ml-5 mb-5">{{ data?.name }}</h3>
-      <div v-if="technologies?.length">
-        <div v-for="(item, index) in technologies" :key="index">
-          {{ item }}
+      <h3 class="text-2xl text-dark font-semibold mt-5 ml-5 mb-3">{{ data?.name }}</h3>
+
+      <div v-if="technologies?.length" class="flex gap-2 flex-wrap">
+        <div class="w-fit pl-2" v-for="item in technologies">
+          <Badge :title="item?.name" :type="2"/>
         </div>
       </div>
     </div>
