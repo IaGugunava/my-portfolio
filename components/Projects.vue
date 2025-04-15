@@ -24,8 +24,6 @@ const fetchProjects = async () => {
     console.log(error);
   }
 
-  console.log(projects.value, "~~~~~~~~~~~~~~~~~~~~~~~~~");
-
 };
 
 // const fetchTechProjects = async () => {
@@ -43,7 +41,6 @@ const fetchProjects = async () => {
 //     console.log(error);
 //   }
 
-//   console.log(technologies.value, "~~~~~~~~~~~~~~~~~~~~~~~~");
 // };
 
 // const changeProjectType = () => {

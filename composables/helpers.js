@@ -8,9 +8,3 @@ export const useConfigs = () => {
     supabaseKey: key,
   };
 };
-
-export const apiFetch = async () => {
-  // const { supabaseUrl, supabaseKey } = useConfigs();
-
-
-}
