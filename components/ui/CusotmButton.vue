@@ -20,7 +20,8 @@ withDefaults(
     icon: null,
     isActive: false,
   }
-);</script>
+);
+</script>
 
 <template>
     <button class=" px-6 py-3 rounded-lg text-lg font-semibold transition-all duration-300 ease-in-out"

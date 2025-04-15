@@ -43,11 +43,11 @@ const inputModel = computed({
 <template>
   <div>
     <div
-      class="relative overflow-hidden rounded-lg bg-white p-4 border-primary"
+      class="relative overflow-hidden ease-in-out border-primary rounded-lg border border-solid"
     >
       <textarea
         v-model="inputModel"
-        class="h-40 w-full resize-none text-dark outline-none"
+        class="h-40 w-full resize-none text-dark p-4 outline-none"
         :placeholder="required ? placeholder + ' *' : placeholder || ''"
       />
       <div v-if="error" class="absolute right-4 top-1">
