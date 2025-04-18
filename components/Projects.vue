@@ -1,14 +1,7 @@
 <script setup lang="ts">
 const supabaseClient = useSupabaseClient();
 
-const containerRef = ref(null);
-
 const projects = ref();
-const technologies = ref();
-// const personalProjects = ref();
-// const otherProjects = ref();
-// const projectState = ref(false);
-// const chosenProjects = ref();
 
 const fetchProjects = async () => {
   const { data, error } = await supabaseClient.from("projects").select(`
@@ -17,49 +10,15 @@ const fetchProjects = async () => {
     image,
     link,
     technologies ( id, name )
-  `);
+  `).order('name', { ascending: true });
   if (!error) {
     projects.value = data;
   } else {
     console.log(error);
   }
-
 };
 
-// const fetchTechProjects = async () => {
-//   const { data, error } = await supabaseClient.from("projects").select(`
-//   id,
-//   name,
-//   image,
-//   link,
-//   technologies ( id, name )
-// `);
-
-//   if (!error) {
-//     technologies.value = data;
-//   } else {
-//     console.log(error);
-//   }
-
-// };
-
-// const changeProjectType = () => {
-//   projectState.value = !projectState.value;
-// }
-
-// const filterProjects = () => {
-//   personalProjects.value = projects.value.filter((el: any) => el.type === true);
-//   otherProjects.value = projects.value.filter((el: any) => el.type === false);
-// }
-
 fetchProjects();
-// fetchTechProjects();
-
-// watch(projectState, () => {
-//   projectState.value ? (chosenProjects.value = personalProjects.value) : (chosenProjects.value = otherProjects.value)
-// }, {
-//   immediate: true
-// })
 </script>
 
 <template>
@@ -73,14 +32,13 @@ fetchProjects();
           </div>
         </div>
 
-        <!-- <div>
-          <CusotmButtons :text="projectState ? 'personal' : 'other'" @click="changeProjectType"/>
-        </div> -->
+        <NuxtLink to="/projects">
+          <CusotmButton text="Explore more" :type="3"/>
+        </NuxtLink>
       </div>
     </div>
     <swiper-container
       class="!overflow-visible"
-      ref="containerRef"
       :breakpoints="{
         0: {
           spaceBetween: 24,
@@ -98,7 +56,6 @@ fetchProjects();
           spaceBetween: 36,
           slidesPerView: 2.5,
         },
-
       }"
       :speed="1000"
     >
@@ -107,7 +64,7 @@ fetchProjects();
         v-for="item in projects"
         :key="item?.id"
       >
-        <Card :data="item" />
+        <Card :data="item" :limit-badges="true" />
       </swiper-slide>
     </swiper-container>
   </div>
