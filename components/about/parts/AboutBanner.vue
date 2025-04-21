@@ -5,7 +5,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="py-10 bg-dark">
+  <div class="py-20 bg-dark">
     <div class="container-fluid">
       <div class="flex justify-between items-center">
         <div class="w-1/3 flex flex-col justify-center">

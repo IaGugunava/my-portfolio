@@ -17,8 +17,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="py-20">
+  <div class="">
     <AboutBanner :image="imgSource"/>
+    <AboutTimeline/>
   </div>
 </template>
 
