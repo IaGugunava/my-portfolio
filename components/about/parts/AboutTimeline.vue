@@ -1,27 +1,32 @@
 <script setup lang="ts">
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
+import Timeline from "primevue/timeline";
 
-const panel = ref();
-const scrollContainer = ref();
-
-onMounted(() => {
-  gsap.registerPlugin(ScrollTrigger);
-  const totalScroll = scrollContainer.value?.scrollWidth - window?.innerWidth;
-
-  gsap.to(scrollContainer.value, {
-    x: () => `-${totalScroll}px`,
-    ease: "none",
-    scrollTrigger: {
-      trigger: panel.value,
-      start: "top top",
-      end: () => `+=${scrollContainer.value.scrollWidth}`,
-      scrub: true,
-      pin: true,
-      anticipatePin: 1,
-    },
-  });
-});
+const timelineData = ref([
+  {
+    id: 1,
+    title: "2022 — Starting Work",
+    teaser:
+      "Joined a company as an intern Frontend Developer. Learned to work in agile teams and write scalable code. Started using Vue 3 (almost mastered it is a day, it was a running gag for a while)",
+  },
+  {
+    id: 2,
+    title: "2023 — Diving Deep",
+    teaser:
+      "Worked on a large-scale dashboard for internal tools. Picked up Nuxt 3 and fell in love with SSR & performance tuning. Mentored interns and did UI/UX reviews with designers.",
+  },
+  {
+    id: 3,
+    title: "2024 — New Challenges",
+    teaser:
+      "Started taking interest in Backend too. Tried out several tools, like spring boot, asp.net, but finally found the one that`s right for me. It was still javascript after all. So I started learning Node.js and Express.js.",
+  },
+  {
+    id: 4,
+    title: "2025 — What’s Next?",
+    teaser:
+      "Created something like this. Seeking opportunities to collaborate, teach, and create. It was still javascript after all. You tell me.",
+  },
+]);
 </script>
 
 <template>
@@ -31,157 +36,46 @@ onMounted(() => {
         My Web Timeline
       </h2>
 
-      <div class="panels">
-        <div class="pannels-wrapper">
-
-        </div>
-        <div class="panel h-screen overflow-hidden relative" ref="panel">
-          <div ref="scrollContainer" class="flex flex-col h-full w-max">
-            <h3 class="text-dark text-2xl font-semibold my-2">
-              2021 — The Beginning
-            </h3>
-
-            <div>
-              <ul>
-                <li
-                  class="relative text-xl before:absolute before:-left-6 before:pr-2 flex items-center w-fit before:w-3 before:h-3 before:rounded-lg before:bg-primary"
-                >
-                  Discovered Web Development in a university course with the
-                  same name
-                </li>
-                <li
-                  class="relative text-xl before:absolute before:-left-6 before:pr-2 flex items-center w-fit before:w-3 before:h-3 before:rounded-lg before:bg-primary"
-                >
-                  Built my first website (It was for my finals and it was a
-                  disaster :) ).
-                </li>
-                <li
-                  class="relative text-xl before:absolute before:-left-6 before:pr-2 flex items-center w-fit before:w-3 before:h-3 before:rounded-lg before:bg-primary"
-                >
-                  Realized I love making things that live in the browser.
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel h-screen overflow-hidden relative" ref="panel">
-          <div ref="scrollContainer" class="flex flex-col h-full w-max">
-            <h3 class="text-dark text-2xl font-semibold my-2">
-              2022 — Starting Work
-            </h3>
-
-            <div>
-              <ul>
-                <li
-                  class="relative text-xl before:absolute before:-left-6 before:pr-2 flex items-center w-fit before:w-3 before:h-3 before:rounded-lg before:bg-primary"
-                >
-                  Joined a company as an intern Frontend Developer.
-                </li>
-                <li
-                  class="relative text-xl before:absolute before:-left-6 before:pr-2 flex items-center w-fit before:w-3 before:h-3 before:rounded-lg before:bg-primary"
-                >
-                  Learned to work in agile teams and write scalable code.
-                </li>
-                <li
-                  class="relative text-xl before:absolute before:-left-6 before:pr-2 flex items-center w-fit before:w-3 before:h-3 before:rounded-lg before:bg-primary"
-                >
-                  Started using Vue 3 (almost mastered it is a day, it was a
-                  running gag for a while)
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel h-screen overflow-hidden relative" ref="panel">
-        <div ref="scrollContainer" class="flex flex-col h-full w-max">
-          <h3 class="text-dark text-2xl font-semibold my-2">
-            2023 — Diving Deep
-          </h3>
-
-          <div>
-            <ul>
-              <li
-                class="relative text-xl before:absolute before:-left-6 before:pr-2 flex items-center w-fit before:w-3 before:h-3 before:rounded-lg before:bg-primary"
-              >
-                Worked on a large-scale dashboard for internal tools.
-              </li>
-              <li
-                class="relative text-xl before:absolute before:-left-6 before:pr-2 flex items-center w-fit before:w-3 before:h-3 before:rounded-lg before:bg-primary"
-              >
-                Picked up Nuxt 3 and fell in love with SSR & performance tuning.
-              </li>
-              <li
-                class="relative text-xl before:absolute before:-left-6 before:pr-2 flex items-center w-fit before:w-3 before:h-3 before:rounded-lg before:bg-primary"
-              >
-                Mentored interns and did UI/UX reviews with designers.
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel h-screen overflow-hidden relative" ref="panel">
-        <div ref="scrollContainer" class="flex flex-col h-full w-max">
-          <h3 class="text-dark text-2xl font-semibold my-2">
-            2024 — New Challenges
-          </h3>
-
-          <div>
-            <ul>
-              <li
-                class="relative text-xl before:absolute before:-left-6 before:pr-2 flex items-center w-fit before:w-3 before:h-3 before:rounded-lg before:bg-primary"
-              >
-                Started taking interest in Backend too.
-              </li>
-              <li
-                class="relative text-xl before:absolute before:-left-6 before:pr-2 flex items-center w-fit before:w-3 before:h-3 before:rounded-lg before:bg-primary"
-              >
-                Tried out several tools, like spring boot, asp.net, but finally
-                found the one that's right for me.
-              </li>
-              <li
-                class="relative text-xl before:absolute before:-left-6 before:pr-2 flex items-center w-fit before:w-3 before:h-3 before:rounded-lg before:bg-primary"
-              >
-                It was still javascript after all. So I started learning Node.js
-                and Express.js.
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel h-screen overflow-hidden relative" ref="panel">
-        <div ref="scrollContainer" class="flex flex-col h-full w-max">
-          <h3 class="text-dark text-2xl font-semibold my-2">
-            2025 — What’s Next?
-          </h3>
-
-          <div>
-            <ul>
-              <li
-                class="relative text-xl before:absolute before:-left-6 before:pr-2 flex items-center w-fit before:w-3 before:h-3 before:rounded-lg before:bg-primary"
-              >
-                Created something like this
-              </li>
-              <li
-                class="relative text-xl before:absolute before:-left-6 before:pr-2 flex items-center w-fit before:w-3 before:h-3 before:rounded-lg before:bg-primary"
-              >
-                Seeking opportunities to collaborate, teach, and create.
-              </li>
-              <li
-                class="relative text-xl before:absolute before:-left-6 before:pr-2 flex items-center w-fit before:w-3 before:h-3 before:rounded-lg before:bg-primary"
-              >
-                You tell me.
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <Timeline :value="timelineData" align="alternate">
+        <template #marker="slotProps">
+        <span class="flex w-8 h-8 items-center justify-center text-white rounded-full z-10 shadow-sm bg-primary">
+            <span>{{ slotProps.item.id }}</span>
+        </span>
+        </template>
+        <template #content="slotProps">
+          <Card class="mt-4">
+            <template #title>
+              <span class="text-2xl text-primary-dark font-bold">
+                {{ slotProps.item.title }}
+              </span>
+            </template>
+            <template #subtitle>
+              <span class="text-lg text-dark">
+                {{ slotProps.item.teaser }}
+              </span>
+            </template>
+          </Card>
+        </template>
+      </Timeline>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style>
+.p-card-body{
+  padding: 30px !important;
+}
+
+.p-timeline-event-connector{
+  width: 2px !important;
+  background-color: #6A0572 !important;
+}
+
+.p-timeline-vertical.p-timeline-alternate .p-timeline-event:nth-child(odd) .p-timeline-event-content .p-card-body{
+  margin-left: 30px;
+}
+
+.p-timeline-vertical.p-timeline-alternate .p-timeline-event:nth-child(even) .p-timeline-event-content .p-card-body{
+  margin-right: 30px;
+}
+</style>
