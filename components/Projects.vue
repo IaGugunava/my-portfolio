@@ -13,7 +13,6 @@ const fetchProjects = async () => {
   `).order('name', { ascending: true });
   if (!error) {
     projects.value = data;
-    console.log(data)
   } else {
     console.log(error);
   }
@@ -59,6 +58,7 @@ fetchProjects();
         },
       }"
       :speed="1000"
+      :slides-offset-before="150"
     >
       <swiper-slide
         v-show="item?.image"

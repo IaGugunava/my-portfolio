@@ -32,7 +32,7 @@ const timelineData = ref([
 <template>
   <div class="bg-white py-20">
     <div class="container-fluid">
-      <h2 class="text-dark text-4xl font-bold mb-4 w-full flex justify-center">
+      <h2 class="text-dark text-4xl font-bold mb-10 w-full flex justify-center">
         My Web Timeline
       </h2>
 

@@ -24,7 +24,7 @@ defineProps<{
         </div>
 
         <div class="w-1/2 flex justify-center relative">
-            <NuxtImg :src="image" alt="profile image" class="aspect-[480/480] object-cover"/>
+            <NuxtImg :src="image" alt="profile image" class="aspect-[480/480] max-w-[400px] object-cover"/>
         </div>
       </div>
     </div>

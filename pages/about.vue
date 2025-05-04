@@ -20,6 +20,7 @@ onMounted(() => {
   <div class="">
     <AboutBanner :image="imgSource"/>
     <AboutTimeline/>
+    <AboutHobbies/>
   </div>
 </template>
 
