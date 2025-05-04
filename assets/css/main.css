@@ -5,3 +5,16 @@
     @apply container max-w-screen-2xl;
   }
 }
+
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill{
+  background: #6A0572 !important;
+}
+
+.swiper-pagination-progressbar.swiper-pagination-horizontal{
+  top: auto !important;
+  bottom: 0 !important;
+}
+
+:root{
+  --swiper-pagination-color: #6A0572
+}

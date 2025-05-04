@@ -29,6 +29,8 @@ export default defineNuxtConfig({
   },
   
   swiper: {
+    //@ts-ignore
+    modules: ["pagination"]
   },
 
   supabase: {
