@@ -13,6 +13,7 @@ const fetchProjects = async () => {
   `).order('name', { ascending: true });
   if (!error) {
     projects.value = data;
+    console.log(data)
   } else {
     console.log(error);
   }
@@ -64,7 +65,7 @@ fetchProjects();
         v-for="item in projects"
         :key="item?.id"
       >
-        <Card :data="item" :limit-badges="true" />
+        <CustomCard :data="item" :limit-badges="true" />
       </swiper-slide>
     </swiper-container>
   </div>
