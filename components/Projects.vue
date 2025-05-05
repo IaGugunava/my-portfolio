@@ -25,9 +25,9 @@ fetchProjects();
   <div class="py-20">
     <div class="container-fluid">
       <div class="mb-8 flex justify-between items-center">
-        <div>
-          <h2 class="font-semibold text-4xl text-dark w-fit">My Projects</h2>
-          <div class="text-xl text-gray-700 w-fit mt-3">
+        <div class="w-1/2 sm:w-full">
+          <h2 class="font-semibold text-2xl sm:text-4xl text-dark w-fit">My Projects</h2>
+          <div class="text-lg sm:text-xl text-gray-700 w-fit mt-3">
             Projects I have collaborated on
           </div>
         </div>
@@ -43,22 +43,35 @@ fetchProjects();
         0: {
           spaceBetween: 24,
           slidesPerView: 1.09,
+          slidesOffsetBefore: 12
         },
         480: {
           spaceBetween: 24,
           slidesPerView: 1.4,
+          slidesOffsetBefore: 12
         },
         768: {
           spaceBetween: 16,
           slidesPerView: 2.2,
+          slidesOffsetBefore: 32
         },
         1024: {
           spaceBetween: 36,
-          slidesPerView: 2.5,
+          slidesPerView: 3,
+          slidesOffsetBefore: 64
         },
+        1280: {
+          spaceBetween: 36,
+          slidesPerView: 3,
+          slidesOffsetBefore: 80
+        },
+        1536: {
+          spaceBetween: 36,
+          slidesPerView: 3,
+          slidesOffsetBefore: 150
+        }
       }"
       :speed="1000"
-      :slides-offset-before="150"
     >
       <swiper-slide
         v-show="item?.image"

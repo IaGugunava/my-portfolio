@@ -10,7 +10,8 @@
   background: #6A0572 !important;
 }
 
-.swiper-pagination-progressbar.swiper-pagination-horizontal{
+
+.swiper-horizontal>.swiper-pagination-progressbar, .swiper-pagination-progressbar.swiper-pagination-horizontal{
   top: auto !important;
   bottom: 0 !important;
 }
