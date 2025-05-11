@@ -13,6 +13,7 @@ const svgHeight = ref(window?.innerHeight - 200);
 const laidOutSkills: Ref<any[]> = ref([]);
 const lines: Ref<any[]> = ref([]);
 const nodeRefs: Ref<any[]> = ref([]);
+const svgRef: Ref<any> = ref()
 
 let simulation: any;
 
@@ -60,8 +61,9 @@ const runSimulation = async (skill: any, width: number, height: number) => {
         d.fy = d.y;
       })
       .on("drag", (event, d: any) => {
-        d.fx = event.x;
-        d.fy = event.y;
+        const point = d3.pointer(event, svgRef.value);
+        d.fx = point[0];
+        d.fy = point[1];
         updateLines();
       })
       .on("end", (event, d: any) => {
@@ -131,7 +133,7 @@ fetchSkills();
             </div>
         </div> -->
 
-    <svg :width="svgWidth" :height="svgHeight" class="absolute top-0 left-0">
+    <svg ref="svgRef" :width="svgWidth" :height="svgHeight" class="absolute top-0 left-0">
       <!-- Lines -->
       <line
         v-for="(line, i) in lines"

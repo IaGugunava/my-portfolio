@@ -1,27 +1,11 @@
 <script setup lang="ts">
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-
-const panel = ref();
-const scrollContainer = ref();
-
-onMounted(() => {
-  gsap.registerPlugin(ScrollTrigger);
-  const totalScroll = scrollContainer.value?.scrollWidth - window?.innerWidth;
-
-  gsap.to(scrollContainer.value, {
-    x: () => `-${totalScroll}px`,
-    ease: "none",
-    scrollTrigger: {
-      trigger: panel.value,
-      start: "top top",
-      end: () => `+=${scrollContainer.value.scrollWidth}`,
-      scrub: true,
-      pin: true,
-      anticipatePin: 1,
-    },
-  });
-});
+const timeline = [
+  {
+    title: "2021 — The Beginning",
+    teaser:
+      "Discovered Web Development in a university course with the same name, Built my first website (It was for my finals and it was a disaster :) ). Realized I love making things that live in the browser.",
+  },
+];
 </script>
 
 <template>
@@ -32,9 +16,7 @@ onMounted(() => {
       </h2>
 
       <div class="panels">
-        <div class="pannels-wrapper">
-
-        </div>
+        <div class="pannels-wrapper"></div>
         <div class="panel h-screen overflow-hidden relative" ref="panel">
           <div ref="scrollContainer" class="flex flex-col h-full w-max">
             <h3 class="text-dark text-2xl font-semibold my-2">
