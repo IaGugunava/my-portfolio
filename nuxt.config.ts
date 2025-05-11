@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/supabase',
+    '@primevue/nuxt-module',
     'nuxt-swiper',
   ],
 
@@ -28,11 +29,19 @@ export default defineNuxtConfig({
   },
   
   swiper: {
+    //@ts-ignore
+    modules: ["pagination"]
   },
 
   supabase: {
     redirect: false
-    },
+  },
+
+  //@ts-ignore
+  primevue: {
+    usePrimeVue: true,
+    autoImport: true
+  },
 
   components: [{ path: "./components", pathPrefix: false }],
 })
