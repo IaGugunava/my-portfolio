@@ -4,7 +4,7 @@
   <div
     class="container-fluid flex flex-col items-center text-center py-20 bg-dark text-white"
   >
-    <h1 class="text-5xl font-bold">Hi, I'm [Your Name] 👋</h1>
+    <h1 class="text-4xl lg:text-5xl font-bold">Hi, I'm [Your Name] 👋</h1>
     <p class="text-xl mt-3 text-gray-300">
       Frontend Developer | Vue & Nuxt Expert
     </p>
@@ -15,12 +15,12 @@
       businesses bring their ideas to life.
     </p>
 
-    <div class="mt-8 flex gap-4 xs:gap-8 flex-col xs:flex-row">
+    <div class="mt-8 flex gap-4 sm:gap-8 w-full sm:w-fit flex-col sm:flex-row">
       
-      <NuxtLink to="projects">
+      <NuxtLink class="w-full sm:w-fit" to="projects">
         <CusotmButton text="View My Work" />
       </NuxtLink>
-      <NuxtLink to="contact">
+      <NuxtLink class="w-full sm:w-fit" to="contact">
         <CusotmButton text="Let's Connect" :type="2" />
       </NuxtLink>
     </div>

@@ -7,7 +7,7 @@ const skills = ref();
 const radius = 24;
 const diameter = radius * 2;
 
-const svgWidth = ref(window?.innerWidth - 300);
+const svgWidth = ref(window?.innerWidth - 100);
 const svgHeight = ref(window?.innerHeight - 200);
 
 const laidOutSkills: Ref<any[]> = ref([]);
@@ -34,7 +34,7 @@ const updateLines = () => {
 const runSimulation = async (skill: any, width: number, height: number) => {
   const nodes = skill.map((item: any) => ({
     ...item,
-    x: Math.random() * (width - 300),
+    x: Math.random() * (width - 100),
     y: Math.random() * (height - 200),
   }));
 
@@ -93,7 +93,7 @@ const fetchSkills = async () => {
 };
 
 const handleResize = () => {
-  svgWidth.value = window?.innerWidth - 300;
+  svgWidth.value = window?.innerWidth - 100;
   svgHeight.value = window?.innerHeight - 200;
   if (skills.value?.length) {
     runSimulation(skills.value, svgWidth.value, svgHeight.value);
@@ -131,6 +131,8 @@ fetchSkills();
             </div>
         </div> -->
 
+        {{ svgWidth }}
+
     <svg :width="svgWidth" :height="svgHeight" class="absolute top-0 left-0">
       <!-- Lines -->
       <line
@@ -147,7 +149,7 @@ fetchSkills();
       <!-- Pins -->
       <foreignObject
         v-for="(item, index) in laidOutSkills"
-        class="pointer-events-auto"
+        class="pointer-events-auto overflow-visible"
         :key="item.id"
         :x="item.x - radius"
         :y="item.y - radius"
