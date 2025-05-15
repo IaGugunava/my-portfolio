@@ -13,7 +13,9 @@
       availability.
     </div>
     <div class="w-[calc(50%-40px)]">
-        <Contact />
+        <!-- <Contact /> -->
+
+        
     </div>
   </div>
 </template>

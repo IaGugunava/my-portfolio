@@ -130,9 +130,6 @@ fetchSkills();
                 <Pin :data="item"/>
             </div>
         </div> -->
-
-        {{ svgWidth }}
-
     <svg :width="svgWidth" :height="svgHeight" class="absolute top-0 left-0">
       <!-- Lines -->
       <line
