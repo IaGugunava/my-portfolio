@@ -25,7 +25,7 @@ fetchProjects();
   <div class="py-20">
     <div class="container-fluid">
       <div class="mb-8 flex justify-between items-center">
-        <div class="w-1/2 sm:w-full">
+        <div class="w-1/2 sm:w-auto">
           <h2 class="font-semibold text-2xl sm:text-4xl text-dark w-fit">My Projects</h2>
           <div class="text-lg sm:text-xl text-gray-700 w-fit mt-3">
             Projects I have collaborated on

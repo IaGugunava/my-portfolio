@@ -6,7 +6,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div class="text-white mt-5 p-5 flex">
+    <div class="text-white mt-5 p-5 flex items-center gap-5">
         <div>
             <p class="text-lg">Step {{ data?.id }}</p>
             <h3 class="text-2xl font-semibold">{{ data?.title }}</h3>

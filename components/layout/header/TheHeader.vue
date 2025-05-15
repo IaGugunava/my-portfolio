@@ -41,10 +41,24 @@ const downloadPrivateFile = async () => {
             <NuxtLink class="text-white text-lg font-semibold transition-all duration-300 ease-in-out" to="skills">skills</NuxtLink>
 
             <div class="ml-3">
-                <CusotmButton text="Download my CV" :type="2" @click="downloadPrivateFile"/>
+              <CusotmButton text="Download my CV" :type="2" @click="downloadPrivateFile"/>
             </div>
+
+            <!-- <div class="grid cursor-pointer justify-items-center gap-1.5 lg:hidden" @click="handleBurger"> -->
+          <!-- <span
+            :class="{ 'translate-y-2.5 rotate-45': isBurgerOpenInstant }"
+            class="h-1 w-8 rounded-full bg-white transition-transform"
+          ></span>
+          <span
+            :class="{ 'scale-x-0': isBurgerOpenInstant }"
+            class="h-1 w-8 rounded-full bg-white transition-transform"
+          ></span>
+          <span
+            :class="{ '-translate-y-2.5 -rotate-45': isBurgerOpenInstant }"
+            class="h-1 w-8 rounded-full bg-white transition-transform"
+          ></span> -->
         </div>
-    </div>
+        </div>
 </template>
 
 <style scoped>

@@ -6,7 +6,7 @@ const imgSource = ref("");
 const getImage = async () => {
   const { data } = await supabaseClient.storage
     .from("avatars")
-    .getPublicUrl("about-profile.jpeg");
+    .getPublicUrl("for-portfolio.jpeg");
 
   imgSource.value = data?.publicUrl;
 };
