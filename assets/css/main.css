@@ -19,3 +19,16 @@
 :root{
   --swiper-pagination-color: #6A0572
 }
+
+.fade-in-out-enter-from,
+.fade-in-out-leave-to {
+  opacity: 0;
+}
+.fade-in-out-enter-active,
+.fade-in-out-leave-active {
+  transition: 0.2s ease-in-out;
+}
+.fade-in-out-enter-to,
+.fade-in-out-leave-from {
+  opacity: 1;
+}

@@ -18,10 +18,10 @@
     <div class="mt-8 flex gap-4 sm:gap-8 w-full sm:w-fit flex-col sm:flex-row">
       
       <NuxtLink class="w-full sm:w-fit" to="projects">
-        <CusotmButton text="View My Work" />
+        <CusotmButton class="w-full sm:w-fit" text="View My Work" />
       </NuxtLink>
       <NuxtLink class="w-full sm:w-fit" to="contact">
-        <CusotmButton text="Let's Connect" :type="2" />
+        <CusotmButton class="w-full sm:w-fit" text="Let's Connect" :type="2" />
       </NuxtLink>
     </div>
   </div>
