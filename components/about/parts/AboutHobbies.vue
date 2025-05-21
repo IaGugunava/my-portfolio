@@ -17,7 +17,7 @@ fetchHobbies();
 </script>
 
 <template>
-  <div class="bg-white py-20">
+  <div class="bg-white py-20 overflow-hidden">
     <div class="container-fluid">
       <div class="mb-8">
         <h2 class="text-dark text-4xl font-bold mb-2 w-full">My Hobbies</h2>
@@ -35,22 +35,40 @@ fetchHobbies();
         0: {
           spaceBetween: 24,
           slidesPerView: 1.09,
+          slidesOffsetBefore: 12
         },
         480: {
           spaceBetween: 24,
           slidesPerView: 1.4,
+          slidesOffsetBefore: 12
         },
         768: {
           spaceBetween: 16,
-          slidesPerView: 2.2,
+          slidesPerView: 2,
+          slidesOffsetBefore: 32
         },
         1024: {
+          spaceBetween: 24,
+          slidesPerView: 2,
+          slidesOffsetBefore: 64
+        },
+        1280: {
+          spaceBetween: 24,
+          slidesPerView: 2.5,
+          slidesOffsetBefore: 80
+        },
+        1536: {
+          spaceBetween: 36,
+          slidesPerView: 3.5,
+          slidesOffsetBefore: 150
+        },
+        1920:{
           spaceBetween: 36,
           slidesPerView: 4,
-        },
+          slidesOffsetBefore: 150
+        }
       }"
       :speed="1000"
-      :slides-offset-before="150"
     >
       <swiper-slide v-for="item in hobbies" :key="item?.id">
         <CustomSecondaryCard :data="item" />

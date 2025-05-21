@@ -38,9 +38,11 @@ const timelineData = ref([
 
       <Timeline :value="timelineData" align="alternate">
         <template #marker="slotProps">
-        <span class="flex w-8 h-8 items-center justify-center text-white rounded-full z-10 shadow-sm bg-primary">
+          <span
+            class="flex w-8 h-8 items-center justify-center text-white rounded-full z-10 shadow-sm bg-primary"
+          >
             <span>{{ slotProps.item.id }}</span>
-        </span>
+          </span>
         </template>
         <template #content="slotProps">
           <Card class="mt-4">
@@ -62,20 +64,56 @@ const timelineData = ref([
 </template>
 
 <style>
-.p-card-body{
+.p-card-body {
   padding: 30px !important;
 }
 
-.p-timeline-event-connector{
+.p-timeline-event-connector {
   width: 2px !important;
-  background-color: #6A0572 !important;
+  background-color: #6a0572 !important;
 }
 
-.p-timeline-vertical.p-timeline-alternate .p-timeline-event:nth-child(odd) .p-timeline-event-content .p-card-body{
+.p-timeline-vertical.p-timeline-alternate
+  .p-timeline-event:nth-child(odd)
+  .p-timeline-event-content
+  .p-card-body {
   margin-left: 30px;
 }
 
-.p-timeline-vertical.p-timeline-alternate .p-timeline-event:nth-child(even) .p-timeline-event-content .p-card-body{
+.p-timeline-vertical.p-timeline-alternate
+  .p-timeline-event:nth-child(even)
+  .p-timeline-event-content
+  .p-card-body {
   margin-right: 30px;
+}
+
+@media (max-width: 768px) {
+  .p-timeline-vertical.p-timeline-alternate .p-timeline-event:nth-child(even) {
+    flex-direction: row !important;
+  }
+
+  .p-timeline-event-opposite {
+    flex: 0 !important;
+  }
+
+  .p-timeline-vertical.p-timeline-alternate
+    .p-timeline-event:nth-child(even)
+    .p-timeline-event-content {
+    text-align: left !important;
+  }
+
+  .p-timeline-vertical.p-timeline-alternate
+    .p-timeline-event:nth-child(odd)
+    .p-timeline-event-content
+    .p-card-body {
+    margin-left: 0;
+  }
+
+  .p-timeline-vertical.p-timeline-alternate
+    .p-timeline-event:nth-child(even)
+    .p-timeline-event-content
+    .p-card-body {
+    margin-right: 0;
+  }
 }
 </style>
