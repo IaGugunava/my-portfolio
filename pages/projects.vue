@@ -60,8 +60,8 @@ fetchProjects();
       </div>
     </div>
     <div class="flex flex-col gap-9 px-4">
-        <div class="flex gap-9 even:justify-end odd:justify-start" v-for="(item, index) in dataChunks" :key="index">
-          <div class="w-[28.6979166667%]" v-show="el?.image" v-for="el in item" :key="el?.id">
+        <div class="flex flex-col md:flex-row gap-9 even:justify-end odd:justify-start" v-for="(item, index) in dataChunks" :key="index">
+          <div class="w-full md:w-[28.6979166667%]" v-show="el?.image" v-for="el in item" :key="el?.id">
               <CustomCard class="w-full " :data="el" />
           </div>
         </div>
