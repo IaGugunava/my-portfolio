@@ -3,6 +3,24 @@ const supabaseClient = useSupabaseClient();
 
 const projects = ref();
 
+const randomInt = ref();
+
+const shuffledList = ref();
+
+function shuffleArray(array: any[]) {
+  const shuffled = [...(array || [])];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+function updateShuffledList() {
+  shuffledList.value = Array.isArray(projects.value) ? shuffleArray(projects.value) : [];
+}
+
+
 const fetchProjects = async () => {
   const { data, error } = await supabaseClient.from("projects").select(`
     id,
@@ -18,7 +36,18 @@ const fetchProjects = async () => {
   }
 };
 
-fetchProjects();
+onMounted(async () => {
+
+  setTimeout(() => {
+    randomInt.value = Math.random();
+  }, 500);
+
+  await fetchProjects();
+
+  updateShuffledList();
+
+})
+
 </script>
 
 <template>
@@ -75,7 +104,7 @@ fetchProjects();
     >
       <swiper-slide
         v-show="item?.image"
-        v-for="item in projects"
+        v-for="item in shuffledList"
         :key="item?.id"
       >
         <CustomCard :data="item" :limit-badges="true" />

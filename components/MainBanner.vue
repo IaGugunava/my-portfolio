@@ -2,11 +2,11 @@
 
 <template>
   <div
-    class="container-fluid flex flex-col items-center text-center py-20 bg-dark text-white"
+    class="container-fluid flex flex-col items-center text-center py-5 md:py-20 bg-dark text-white"
   >
-    <h1 class="text-4xl lg:text-5xl font-bold">Hi, I'm [Your Name] 👋</h1>
+    <h1 class="text-4xl lg:text-5xl font-bold">Hi, I'm Ia 👋</h1>
     <p class="text-xl mt-3 text-gray-300">
-      Frontend Developer | Vue & Nuxt Expert
+      Web Developer | With Nuxt and Express
     </p>
 
     <p class="mt-5 max-w-2xl text-lg text-gray-400">
