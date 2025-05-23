@@ -8,9 +8,6 @@ const { data, error } = await useAsyncData(
   async () => await supabaseClient.from('socials').select('*')
 )
 
-console.log(socials?.value)
-
-
 </script>
 
 <template>
