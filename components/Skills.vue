@@ -2,20 +2,12 @@
 
 const supabaseClient = useSupabaseClient();
 
-const skills = ref();
+const skills: Ref<any> = computed(() => data?.value?.data?.slice(0, 12));
 
-const fetchSkills = async () => {
-    const { data, error } = await supabaseClient.from('technologies').select('*');
-
-    if(!error){
-        skills.value = data?.slice(0, 12);
-    } else {
-        console.log(error)
-    }
-
-}
-
-fetchSkills()
+const { data, error } = await useAsyncData(
+  'skills',
+  async () => await supabaseClient.from('technologies').select('*')
+)
 
 </script>
 

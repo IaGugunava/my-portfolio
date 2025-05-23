@@ -1,19 +1,16 @@
 <script setup lang="ts">
 const supabaseClient = useSupabaseClient();
 
-const socials = ref();
+const socials: Ref<any> = computed(() => data?.value?.data);
 
-const fetchSocials = async () => {
-  const { data, error } = await supabaseClient.from("socials").select("*");
+const { data, error } = await useAsyncData(
+  'socials',
+  async () => await supabaseClient.from('socials').select('*')
+)
 
-  if (!error) {
-    socials.value = data;
-  } else {
-    console.log(error);
-  }
-};
+console.log(socials?.value)
 
-fetchSocials();
+
 </script>
 
 <template>

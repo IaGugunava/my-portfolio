@@ -57,7 +57,7 @@ const submitForm = async () => {
       <h2 class="text-4xl font-bold text-primary">Contact me</h2>
     </div>
     <div class="flex flex-wrap mt-8 gap-6">
-      <CustomInput
+      <!-- <CustomInput
         class="w-[calc(50%-12px)]"
         :error="v$.name?.$errors?.[0]?.$message.toString()"
         :model-value="form.name"
@@ -82,7 +82,7 @@ const submitForm = async () => {
 
       <div class="flex w-full justify-center items-center">
         <CusotmButton text="submit" @click="submitForm" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

@@ -44,7 +44,7 @@ const technologies = computed(() =>
             :key="item?.id"
             class="w-auto"
           >
-            <Badge :title="item?.name" :type="2" class="w-fit" />
+            <CustomBadge :title="item?.name" :type="2" class="w-fit" />
           </swiper-slide>
         </swiper-container>
       </div>

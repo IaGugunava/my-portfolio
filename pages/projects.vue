@@ -4,43 +4,66 @@ import CusotmButton from '~/components/ui/CusotmButton.vue';
 const supabaseClient = useSupabaseClient();
 
 const itemRow = ref(3);
-const projects = ref();
 // const projectState = ref("all");
 // const chosenProjects = ref();
 const dataChunks: Ref<any[]> = ref([])
+
+const projects: Ref<any> = computed(() => error !== null ? data?.value?.data : []);
 
 // const filterProjects = () => {
 //   personalProjects.value = projects.value.filter((el: any) => el.type === 'personal');
 //   otherProjects.value = projects.value.filter((el: any) => el.type === 'commercial');
 // }
 
-const fetchProjects = async () => {
-  const { data, error } = await supabaseClient.from("projects").select(`
+const { data, error } = await useAsyncData(
+  'projects',
+  async () => await supabaseClient.from("projects").select(`
     id,
     name,
     image,
     link,
     technologies ( id, name )
-  `).order('name', { ascending: true });
-  if (!error) {
-    projects.value = data;
-  } else {
-    console.log(error);
-  }
+  `).order('name', { ascending: true })
+)
 
+const sliceData = () => {
   for (let i = 0; i < projects?.value?.length; i += itemRow.value) {
     const chunk: any[] = projects.value?.slice(i, i + itemRow.value);
     dataChunks.value.push(chunk);
   }
-};
+}
 
-fetchProjects();
+// const fetchProjects = async () => {
+//   const { data, error } = await supabaseClient.from("projects").select(`
+//     id,
+//     name,
+//     image,
+//     link,
+//     technologies ( id, name )
+//   `).order('name', { ascending: true });
+//   if (!error) {
+//     projects.value = data;
+//   } else {
+//     console.log(error);
+//   }
+
+//   for (let i = 0; i < projects?.value?.length; i += itemRow.value) {
+//     const chunk: any[] = projects.value?.slice(i, i + itemRow.value);
+//     dataChunks.value.push(chunk);
+//   }
+// };
+
+// fetchProjects();
 
 // watch(projectState, () => {
 //   projectState.value ? (chosenProjects.value = personalProjects.value) : (chosenProjects.value = otherProjects.value)
 // }, {
 //   immediate: true
 // })
+
+onMounted(() => {
+  sliceData()
+})
 </script>
 
 <template>

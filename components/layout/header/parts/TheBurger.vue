@@ -32,34 +32,18 @@ const downloadPrivateFile = async () => {
 <template>
   <div class="w-full h-[100dvh] z-10 fixed top-[64px] left-0 bg-dark">
     <div class="flex gap-5 flex-col justify-center items-center">
-      <div
-        class="w-full border-b border-white flex justify-center items-center pb-5"
-      >
-        <NuxtLink class="text-white text-lg font-semibold" to="/about">
+        <NuxtLink class="text-white text-lg font-semibold w-full border-b border-white flex justify-center items-center pb-5" to="/about">
           about
         </NuxtLink>
-      </div>
-      <div
-        class="w-full border-b border-white flex justify-center items-center pb-5"
-      >
-        <NuxtLink class="text-white text-lg font-semibold" to="/projects">
+        <NuxtLink class="text-white text-lg font-semibold w-full border-b border-white flex justify-center items-center pb-5" to="/projects">
           projects
         </NuxtLink>
-      </div>
-      <div
-        class="w-full border-b border-white flex justify-center items-center pb-5"
-      >
-        <NuxtLink class="text-white text-lg font-semibold" to="/skills">
+        <NuxtLink class="text-white text-lg font-semibold w-full border-b border-white flex justify-center items-center pb-5" to="/skills">
           skills
         </NuxtLink>
-      </div>
-      <div
-        class="w-full border-b border-white flex justify-center items-center pb-5"
-      >
-        <NuxtLink class="text-white text-lg font-semibold" to="/contact">
+        <NuxtLink class="text-white text-lg font-semibold w-full border-b border-white flex justify-center items-center pb-5" to="/contact">
           contact
         </NuxtLink>
-      </div>
     </div>
 
     <div

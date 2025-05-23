@@ -12,9 +12,9 @@
       hosting services for your website's fast performance and constant
       availability.
     </div>
-    <!-- <div class="w-[calc(50%-40px)]">
+    <div class="w-[calc(50%-40px)]">
         <Contact />
-    </div> -->
+    </div>
   </div>
 </template>
 
