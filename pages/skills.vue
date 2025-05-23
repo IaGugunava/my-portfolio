@@ -50,7 +50,7 @@ const runSimulation = async (skill: any, width: number, height: number) => {
     .force("x", d3.forceX(width / 2).strength(0.02))
     .force("y", d3.forceY(height / 2).strength(0.02))
     .force("charge", d3.forceManyBody().strength(-400))
-    .force("collision", d3.forceCollide(radius + 10))
+    .force("collision", d3.forceCollide(radius + 2))
     .on("tick", () => {
       nodes.forEach(clampNodeToBounds);
     })
@@ -74,7 +74,7 @@ const runSimulation = async (skill: any, width: number, height: number) => {
     d3
       .drag()
       .on("start", (event, d: any) => {
-        if (!event.active) simulation.alphaTarget(0.3).restart();
+        if (!event.active) simulation.alphaTarget(0.5).restart();
         d.fx = d.x;
         d.fy = d.y;
       })
@@ -142,7 +142,7 @@ fetchSkills();
 
 <template>
   <div
-    class="mx-auto pb-20 relative h-[100dvh] overflow-y-hidden flex items-center justify-center"
+    class="skills-page mx-auto pb-20 relative h-[100dvh] overflow-y-hidden flex items-center justify-center"
   >
     <!-- <div class="container-fluid flex flex-col gap-8 justify-center items-center">
             <div v-for="item in skills" :key="item?.id">
@@ -183,4 +183,16 @@ fetchSkills();
 <style scoped>
 foreignObject {
   pointer-events: all;
-}</style>
+}
+
+.skills-page{
+  background-image: url("@/assets/imgs/bubbles.png");
+  background-position: center;
+  /* background-clip: content-box; */
+  background-repeat: no-repeat;
+  background-color: rgba(255,255,255,0.9);
+  background-blend-mode: lighten;
+  background-size: cover;
+  
+}
+</style>

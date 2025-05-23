@@ -1,19 +1,13 @@
 <script setup lang="ts">
 const supabaseClient = useSupabaseClient();
 
-const hobbies = ref();
+const hobbies: Ref<any> = computed(() => data?.value?.data);
 
-const fetchHobbies = async () => {
-  const { data, error } = await supabaseClient.from("hobbies").select("*");
+const { data, error } = await useAsyncData(
+  'hobbies',
+  async () => await supabaseClient.from('hobbies').select('*')
+)
 
-  if (!error) {
-    hobbies.value = data;
-  } else {
-    console.log(error);
-  }
-};
-
-fetchHobbies();
 </script>
 
 <template>

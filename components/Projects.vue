@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const supabaseClient = useSupabaseClient();
 
-const projects = ref();
-
 const randomInt = ref();
 
 const shuffledList = ref();
+
+const projects: Ref<any> = computed(() => error !== null ? data?.value?.data : []);
 
 function shuffleArray(array: any[]) {
   const shuffled = [...(array || [])];
@@ -20,29 +20,22 @@ function updateShuffledList() {
   shuffledList.value = Array.isArray(projects.value) ? shuffleArray(projects.value) : [];
 }
 
-
-const fetchProjects = async () => {
-  const { data, error } = await supabaseClient.from("projects").select(`
+const { data, error } = await useAsyncData(
+  'projects',
+  async () => await supabaseClient.from("projects").select(`
     id,
     name,
     image,
     link,
     technologies ( id, name )
-  `).order('name', { ascending: true });
-  if (!error) {
-    projects.value = data;
-  } else {
-    console.log(error);
-  }
-};
+  `).order('name', { ascending: true })
+)
 
 onMounted(async () => {
 
   setTimeout(() => {
     randomInt.value = Math.random();
   }, 500);
-
-  await fetchProjects();
 
   updateShuffledList();
 

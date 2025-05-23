@@ -1,28 +1,23 @@
 <script setup lang="ts">
 const supabaseClient = useSupabaseClient();
 
-const imgSource = ref("");
 
-const getImage = async () => {
-  const { data } = await supabaseClient.storage
-    .from("avatars")
-    .getPublicUrl("for-portfolio.jpeg");
+const { data, error } = await useAsyncData(
+  'aboutme',
+  async () => await supabaseClient.storage.from("avatars").getPublicUrl("for-portfolio.jpeg")
+)
 
-  imgSource.value = data?.publicUrl;
-};
+const imgSource = computed(() => data?.value?.data?.publicUrl);
 
-onMounted(() => {
-    getImage()
-})
 </script>
 
 <template>
   <div class="py-5 md:py-20 bg-white text-gray-900">
-    <div class="container-fluid flex flex-col-reverse md:flex-row">
+    <div class="container-fluid flex flex-col-reverse md:flex-row gap-6 md:gap-0">
       <div>
         <NuxtImg :src="imgSource" alt="profile image" class="aspect-[500/600] max-w-full md:max-w-[600px] object-cover"/>
       </div>
-      <div class="max-w-4xl w-1/2 mx-auto text-left">
+      <div class="max-w-4xl w-full md:w-1/2 mx-auto text-left">
         <h2 class="text-2xl sm:text-4xl font-bold text-[#6A0572]">About Me</h2>
         <p class="mt-4 text-md sm:text-lg text-gray-600">
           I'm Ia Gugunava, a <span class="text-primary font-semibold">Web Developer</span> with expertise in
