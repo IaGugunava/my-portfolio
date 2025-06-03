@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@primevue/nuxt-module',
     'nuxt-swiper',
+    '@nuxtjs/turnstile',
   ],
 
   css: ["~/assets/css/main.css"],
@@ -24,10 +25,15 @@ export default defineNuxtConfig({
     typeCheck: true
   },
 
+  turnstile: {
+    siteKey: process.env.NUXT_TURNSTILE_SECRET_KEY,
+  },
+  
   runtimeConfig: {
     public: {
       supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL,
       supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY,
+      turnstileKey: process.env.NUXT_PUBLIC_TURNSTILE_SITE_KEY
     }
   },
   

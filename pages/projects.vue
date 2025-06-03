@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import CusotmButton from '~/components/ui/CusotmButton.vue';
+import { gsap } from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger);
 const supabaseClient = useSupabaseClient();
 
 const itemRow = ref(3);
@@ -61,9 +64,34 @@ const sliceData = () => {
 //   immediate: true
 // })
 
-onMounted(() => {
-  sliceData()
+
+const animateElements = () => {
+  const items = gsap.utils.toArray('.project-section')
+
+  items.forEach((item: any, index) => {
+    const isEven = index % 2 === 0
+    gsap.from(item, {
+      opacity: 0,
+      x: isEven ? -150 : 150,
+      duration: 0.8,
+      ease: 'power2.in',
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+    })
 })
+}
+
+onMounted(async () => {
+  sliceData()
+
+  await nextTick()
+
+  animateElements()
+})
+
 </script>
 
 <template>
@@ -83,7 +111,7 @@ onMounted(() => {
       </div>
     </div>
     <div class="flex flex-col gap-9 px-4">
-        <div class="flex flex-col md:flex-row gap-9 even:justify-end odd:justify-start" v-for="(item, index) in dataChunks" :key="index">
+        <div class="project-section flex flex-col md:flex-row gap-9 even:justify-end odd:justify-start" v-for="(item, index) in dataChunks" :key="index">
           <div class="w-full md:w-[28.6979166667%]" v-show="el?.image" v-for="el in item" :key="el?.id">
               <CustomCard class="w-full " :data="el" />
           </div>

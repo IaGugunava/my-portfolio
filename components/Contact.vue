@@ -17,6 +17,7 @@ const formRules = {
 };
 
 const formDataStatus = ref(false);
+const token = ref()
 
 const v$ = useVuelidate(formRules, form, { $lazy: true });
 
@@ -38,13 +39,15 @@ const submitForm = async () => {
 
   try {
     // @ts-ignore
-    const { error } = await supabaseClient.from("contacts").insert({
+    const { error } = await supabaseClient.from("contact_form").insert({
       name: form.name,
       email: form.email,
       body: form.body,
     });
 
     if (error) throw error;
+
+    resetForm()
   } catch (err) {
     console.log(err);
   }
@@ -56,8 +59,8 @@ const submitForm = async () => {
     <div class="w-full flex justify-center">
       <h2 class="text-4xl font-bold text-primary">Contact me</h2>
     </div>
-    <div class="flex flex-wrap mt-8 gap-6">
-      <!-- <CustomInput
+    <div class="flex flex-wrap mt-14 gap-6">
+      <CustomInput
         class="w-[calc(50%-12px)]"
         :error="v$.name?.$errors?.[0]?.$message.toString()"
         :model-value="form.name"
@@ -80,12 +83,18 @@ const submitForm = async () => {
         @update:model-value="(e: any) => form.body = e"
       />
 
+      <NuxtTurnstile v-model="token" />
+
       <div class="flex w-full justify-center items-center">
         <CusotmButton text="submit" @click="submitForm" />
-      </div> -->
+      </div>
+
+      <div>
+        <NuxtLink/>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped></style>
-se
+
