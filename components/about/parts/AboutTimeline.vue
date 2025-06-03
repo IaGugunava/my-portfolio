@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Timeline from "primevue/timeline";
+import { gsap } from 'gsap'
 
 const timelineData = ref([
   {
@@ -27,6 +28,30 @@ const timelineData = ref([
       "Created something like this. Seeking opportunities to collaborate, teach, and create. It was still javascript after all. You tell me.",
   },
 ]);
+
+const animateElements = () => {
+  const items = gsap.utils.toArray('.timeline-item')
+
+  items.forEach((item: any, index) => {
+    gsap.from(item, {
+      opacity: 0,
+      y: 40,
+      duration: 0.8,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+    })
+})
+}
+
+onMounted(async () => {
+  await nextTick()
+
+  animateElements()
+})
 </script>
 
 <template>
@@ -45,18 +70,20 @@ const timelineData = ref([
           </span>
         </template>
         <template #content="slotProps">
-          <Card class="mt-4">
-            <template #title>
-              <span class="text-2xl text-primary-dark font-bold">
-                {{ slotProps.item.title }}
-              </span>
-            </template>
-            <template #subtitle>
-              <span class="text-lg text-dark">
-                {{ slotProps.item.teaser }}
-              </span>
-            </template>
-          </Card>
+          <div class="timeline-item">
+            <Card class="mt-4">
+              <template #title>
+                <span class="text-2xl text-primary-dark font-bold">
+                  {{ slotProps.item.title }}
+                </span>
+              </template>
+              <template #subtitle>
+                <span class="text-lg text-dark">
+                  {{ slotProps.item.teaser }}
+                </span>
+              </template>
+            </Card>
+          </div>
         </template>
       </Timeline>
     </div>

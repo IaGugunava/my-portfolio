@@ -64,13 +64,13 @@ watch(() => route.fullPath, () => {
         >
         <NuxtLink
           class="text-white hover:text-primary text-lg font-semibold transition-all duration-300 ease-in-out"
-          to="contact"
-          >contact</NuxtLink
+          to="skills"
+          >skills</NuxtLink
         >
         <NuxtLink
           class="text-white hover:text-primary text-lg font-semibold transition-all duration-300 ease-in-out"
-          to="skills"
-          >skills</NuxtLink
+          to="contact"
+          >contact</NuxtLink
         >
 
         <div class="ml-3">
