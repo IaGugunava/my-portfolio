@@ -53,22 +53,22 @@ watch(() => route.fullPath, () => {
     <div class="flex">
       <div class="hidden md:flex items-center gap-5">
         <NuxtLink
-          class="text-white text-lg font-semibold transition-all duration-300 ease-in-out"
+          class="text-white hover:text-primary text-lg font-semibold transition-all duration-300 ease-in-out"
           to="about"
           >about me</NuxtLink
         >
         <NuxtLink
-          class="text-white text-lg font-semibold transition-all duration-300 ease-in-out"
+          class="text-white hover:text-primary text-lg font-semibold transition-all duration-300 ease-in-out"
           to="projects"
           >projects</NuxtLink
         >
         <NuxtLink
-          class="text-white text-lg font-semibold transition-all duration-300 ease-in-out"
+          class="text-white hover:text-primary text-lg font-semibold transition-all duration-300 ease-in-out"
           to="contact"
           >contact</NuxtLink
         >
         <NuxtLink
-          class="text-white text-lg font-semibold transition-all duration-300 ease-in-out"
+          class="text-white hover:text-primary text-lg font-semibold transition-all duration-300 ease-in-out"
           to="skills"
           >skills</NuxtLink
         >
@@ -111,4 +111,8 @@ watch(() => route.fullPath, () => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.router-link-active{
+  color: #6A0572;
+}
+</style>
