@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/vue";
 import 'swiper/css'
 import 'swiper/css/pagination'
 
@@ -53,12 +54,12 @@ const workflowData = [
 </script>
 
 <template>
-  <div class="bg-dark py-20 relative">
+  <div class="bg-dark py-20 relative overflow-hidden">
     <div class="container-fluid">
       <h2 class="text-white text-4xl font-bold mb-5 w-full">My Workflow</h2>
     </div>
 
-    <swiper-container
+    <Swiper
       class="!overflow-visible custom-swiper"
       style=""
       :pagination="{
@@ -70,27 +71,45 @@ const workflowData = [
         0: {
           spaceBetween: 24,
           slidesPerView: 1.09,
+          slidesOffsetBefore: 12
         },
         480: {
           spaceBetween: 24,
           slidesPerView: 1.4,
+          slidesOffsetBefore: 12
         },
         768: {
           spaceBetween: 16,
-          slidesPerView: 2.2,
+          slidesPerView: 2,
+          slidesOffsetBefore: 32
         },
         1024: {
           spaceBetween: 24,
-          slidesPerView: 2.7,
+          slidesPerView: 2.5,
+          slidesOffsetBefore: 64
         },
+        1280: {
+          spaceBetween: 24,
+          slidesPerView: 2.5,
+          slidesOffsetBefore: 80
+        },
+        1536: {
+          spaceBetween: 36,
+          slidesPerView: 3.5,
+          slidesOffsetBefore: 150
+        },
+        1920:{
+          spaceBetween: 36,
+          slidesPerView: 4,
+          slidesOffsetBefore: 150
+        }
       }"
       :speed="1000"
-      :slides-offset-before="150"
     >
-      <swiper-slide v-for="item in workflowData" :key="item?.id">
+      <SwiperSlide v-for="item in workflowData" :key="item?.id">
           <workflowCard :data="item" :total-length="workflowData?.length"/>
-      </swiper-slide>
-    </swiper-container>
+      </SwiperSlide>
+    </Swiper>
 
     <div class="custom-swiper-progressbar absolute bottom-0 left-0 w-full h-1 bg-gray-300"></div>
 

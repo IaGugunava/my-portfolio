@@ -1,46 +1,97 @@
 <script setup lang="ts">
 import CusotmButton from '~/components/ui/CusotmButton.vue';
+import { gsap } from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger);
 const supabaseClient = useSupabaseClient();
 
 const itemRow = ref(3);
-const projects = ref();
 // const projectState = ref("all");
 // const chosenProjects = ref();
 const dataChunks: Ref<any[]> = ref([])
+
+const projects: Ref<any> = computed(() => error !== null ? data?.value?.data : []);
 
 // const filterProjects = () => {
 //   personalProjects.value = projects.value.filter((el: any) => el.type === 'personal');
 //   otherProjects.value = projects.value.filter((el: any) => el.type === 'commercial');
 // }
 
-const fetchProjects = async () => {
-  const { data, error } = await supabaseClient.from("projects").select(`
+const { data, error } = await useAsyncData(
+  'projects',
+  async () => await supabaseClient.from("projects").select(`
     id,
     name,
     image,
     link,
     technologies ( id, name )
-  `).order('name', { ascending: true });
-  if (!error) {
-    projects.value = data;
-  } else {
-    console.log(error);
-  }
+  `).order('name', { ascending: true })
+)
 
+const sliceData = () => {
   for (let i = 0; i < projects?.value?.length; i += itemRow.value) {
     const chunk: any[] = projects.value?.slice(i, i + itemRow.value);
     dataChunks.value.push(chunk);
   }
-};
+}
 
-fetchProjects();
+// const fetchProjects = async () => {
+//   const { data, error } = await supabaseClient.from("projects").select(`
+//     id,
+//     name,
+//     image,
+//     link,
+//     technologies ( id, name )
+//   `).order('name', { ascending: true });
+//   if (!error) {
+//     projects.value = data;
+//   } else {
+//     console.log(error);
+//   }
+
+//   for (let i = 0; i < projects?.value?.length; i += itemRow.value) {
+//     const chunk: any[] = projects.value?.slice(i, i + itemRow.value);
+//     dataChunks.value.push(chunk);
+//   }
+// };
+
+// fetchProjects();
 
 // watch(projectState, () => {
 //   projectState.value ? (chosenProjects.value = personalProjects.value) : (chosenProjects.value = otherProjects.value)
 // }, {
 //   immediate: true
 // })
+
+
+const animateElements = () => {
+  const items = gsap.utils.toArray('.project-section')
+
+  items.forEach((item: any, index) => {
+    const isEven = index % 2 === 0
+    gsap.from(item, {
+      opacity: 0,
+      x: isEven ? -150 : 150,
+      duration: 0.8,
+      ease: 'power2.in',
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+    })
+})
+}
+
+onMounted(async () => {
+  sliceData()
+
+  await nextTick()
+
+  animateElements()
+})
+
 </script>
 
 <template>
@@ -60,8 +111,8 @@ fetchProjects();
       </div>
     </div>
     <div class="flex flex-col gap-9 px-4">
-        <div class="flex gap-9 even:justify-end odd:justify-start" v-for="(item, index) in dataChunks" :key="index">
-          <div class="w-[28.6979166667%]" v-show="el?.image" v-for="el in item" :key="el?.id">
+        <div class="project-section flex flex-col md:flex-row gap-9 even:justify-end odd:justify-start" v-for="(item, index) in dataChunks" :key="index">
+          <div class="w-full md:w-[28.6979166667%]" v-show="el?.image" v-for="el in item" :key="el?.id">
               <CustomCard class="w-full " :data="el" />
           </div>
         </div>
