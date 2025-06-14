@@ -1,19 +1,44 @@
 <script setup lang="ts">
+import { gsap } from 'gsap';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 const supabaseClient = useSupabaseClient();
 
+const imgSource = computed(() => data?.value?.data?.publicUrl);
+
+const elementWrapper = ref(null)
+
+const animateelement = () => {
+  gsap.from(elementWrapper.value, {
+    scrollTrigger: {
+      trigger: elementWrapper.value,
+      start: "top bottom-=100",
+      onToggle: (scrollTrigger) => {
+        scrollTrigger.refresh();
+      }
+    },
+    opacity: 0,
+    duration: 1.2,
+    ease: 'power2.in'
+  })
+}
+
+onMounted(() => {
+  animateelement();
+})
 
 const { data, error } = await useAsyncData(
   'aboutme',
   async () => await supabaseClient.storage.from("avatars").getPublicUrl("for-portfolio.jpeg")
 )
 
-const imgSource = computed(() => data?.value?.data?.publicUrl);
 
 </script>
 
 <template>
   <div class="py-5 md:py-20 bg-white text-gray-900">
-    <div class="container-fluid flex flex-col-reverse md:flex-row gap-6 md:gap-0">
+    <div class="container-fluid flex flex-col-reverse md:flex-row gap-6 md:gap-0 opacity-100" ref="elementWrapper">
       <div>
         <NuxtImg :src="imgSource" alt="profile image" class="aspect-[500/600] max-w-full md:max-w-[600px] object-cover"/>
       </div>

@@ -1,13 +1,40 @@
 <script setup lang="ts">
+import { gsap } from 'gsap';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 defineProps<{
   image: string | undefined;
 }>();
-</script>
+
+const elementWrapper = ref(null)
+
+const animateelement = () => {
+  gsap.from(elementWrapper.value, {
+    scrollTrigger: {
+      trigger: elementWrapper.value,
+      start: "top bottom-=100",
+      onToggle: (scrollTrigger) => {
+        scrollTrigger.refresh();
+      }
+    },
+    opacity: 0,
+    duration: 1.2,
+    ease: 'power2.in'
+  })
+}
+
+onMounted(() => {
+  animateelement();
+})
+
+</script> 
 
 <template>
   <div class="py-20 bg-dark">
     <div class="container-fluid">
-      <div class="flex justify-between items-center flex-col md:flex-row gap-4 md:gap-0">
+      <div ref="elementWrapper"  class="flex justify-between items-center opacity-100 flex-col md:flex-row gap-4 md:gap-0">
         <div class="w-full md:w-1/3 flex flex-col justify-center">
           <h1 class="text-white text-4xl font-bold mb-4">✨ About Me</h1>
           <p class="text-white text-lg">

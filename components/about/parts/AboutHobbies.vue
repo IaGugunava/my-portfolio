@@ -1,12 +1,37 @@
 <script setup lang="ts">
+import { gsap } from 'gsap';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const supabaseClient = useSupabaseClient();
 
 const hobbies: Ref<any> = computed(() => data?.value?.data);
+const elementWrapper = ref()
 
 const { data, error } = await useAsyncData(
   'hobbies',
   async () => await supabaseClient.from('hobbies').select('*')
 )
+
+const animateelement = () => {
+  gsap.from(elementWrapper.value, {
+    scrollTrigger: {
+      trigger: elementWrapper.value,
+      start: "top bottom-=100",
+      onToggle: (scrollTrigger) => {
+        scrollTrigger.refresh();
+      }
+    },
+    opacity: 0,
+    duration: 1.2,
+    ease: 'power2.in'
+  })
+}
+
+onMounted(() => {
+  // animateelement();
+})
 
 </script>
 

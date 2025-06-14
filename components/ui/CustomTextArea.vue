@@ -56,7 +56,7 @@ const inputModel = computed({
     </div>
 
     <transition name="fade">
-      <p v-if="error" class="absolute px-4 pt-1 text-color-text-danger">
+      <p v-if="error" class="absolute px-4 pt-1 text-[#FC5A40]">
         {{ errorText }}
       </p>
     </transition>
