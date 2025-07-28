@@ -49,7 +49,9 @@ watch(() => route.fullPath, () => {
 
 <template>
   <div class="flex justify-between items-center w-full bg-dark p-5">
-    <a class="text-white" href="/">logo?</a>
+    <a class="text-white" href="/">
+      <img src="../../../assets/imgs/logo-white.svg" class="w-[100px] h-[100px]"/>
+    </a>
     <div class="flex">
       <div class="hidden md:flex items-center gap-5">
         <NuxtLink

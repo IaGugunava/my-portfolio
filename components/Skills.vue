@@ -38,7 +38,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="container-fluid py-20 bg-dark items-center flex flex-col gap-12 md:gap-8 justify-center">
+    <div class="container-fluid py-20 bg-dark items-center flex flex-col gap-12 md:gap-20 justify-center">
         <h2 class="font-semibold text-2xl sm:text-4xl text-white w-fit">My Skills</h2>
 
         <div class="grid gap-4 md:gap-6 grid-cols-3 sm:grid-cols-4 md:grid-cols-6 w-full" >
@@ -49,6 +49,10 @@ onMounted(async () => {
                 </NuxtLink>
             </div>
         </div>
+
+        <NuxtLink to="/skills">
+          <CusotmButton text="explore deeper" :type="2"/>
+        </NuxtLink>
     </div>
 </template>
 

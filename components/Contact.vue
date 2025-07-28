@@ -4,6 +4,8 @@ import { useVuelidate } from "@vuelidate/core";
 
 const supabaseClient = useSupabaseClient();
 
+// const runtimeConfig = useRuntimeConfig();
+
 const form = reactive({
   name: "",
   email: "",
@@ -18,8 +20,28 @@ const formRules = {
 
 const formDataStatus = ref(false);
 const token = ref()
+// const captchaKey = turnstileKey;
 
 const v$ = useVuelidate(formRules, form, { $lazy: true });
+
+
+// async function verifyCaptcha(token: string): Promise<boolean> {
+//   const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/x-www-form-urlencoded"
+//     },
+//     body: new URLSearchParams({
+//       //@ts-expect-error
+//       secret: captchaKey.toString(), // From Cloudflare Turnstile dashboard
+//       response: token
+//     })
+//   })
+
+//   const data = await response.json()
+//   return data.success === true
+// }
+
 
 const resetForm = () => {
   formDataStatus.value = true;
@@ -36,6 +58,15 @@ const submitForm = async () => {
   const valid = await v$.value.$validate();
 
   if (!valid) return;
+
+  // const captchaToken = token.value;
+
+  // const verified = await verifyCaptcha(captchaToken)
+
+  // if (!verified) {
+  // throw new Error("CAPTCHA failed")
+  // }
+
 
   try {
     // @ts-ignore
@@ -56,9 +87,6 @@ const submitForm = async () => {
 
 <template>
   <div class="">
-    <div class="w-full flex justify-center">
-      <h2 class="text-4xl font-bold text-primary">Contact me</h2>
-    </div>
     <div class="flex flex-wrap mt-14 gap-6">
       <CustomInput
         class="w-[calc(50%-12px)]"
@@ -83,7 +111,7 @@ const submitForm = async () => {
         @update:model-value="(e: any) => form.body = e"
       />
 
-      <NuxtTurnstile v-model="token" />
+      <!-- <NuxtTurnstile v-model="token" :site-key="runtimeConfig?.turnstileKey?.toString()"/> -->
 
       <div class="flex w-full justify-center items-center">
         <CusotmButton text="submit" @click="submitForm" />

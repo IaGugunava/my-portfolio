@@ -1,0 +1,16 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+	<title>New Project</title>
+	<style>
+		.s0 { fill: #000000 } 
+	</style>
+	<g id="Folder 1">
+		<g id="Folder 2">
+			<path id="A" class="s0" aria-label="A"  d="m219.1 244.1l-20.1-54.4-20.1 54.4zm-70.2 40.4l41.7-109.4h16.8l41.7 109.4h-15.4l-10-28.1h-49.3l-9.9 28.1z"/>
+			<path id="T" class="s0" aria-label="T"  d="m215.8 256.6v-12.5h92.5v12.5h-38.8v96.9h-14.9v-96.9z"/>
+		</g>
+		<g id="Folder 3">
+			<path id="&lt;" class="s0" aria-label="&lt;"  d="m133.8 209.8v13.4l-75.6 26.9 75.6 26.7v13.3l-93.9-34v-12.2z"/>
+			<path id="/&gt;" class="s0" aria-label="/&gt;"  d="m295 311.9l38.1-123.3h12.4l-38 123.3zm141.8-60.8l-75.4-26.9v-13.4l93.9 34.1v12.2l-93.9 34v-13.3z"/>
+		</g>
+	</g>
+</svg>
