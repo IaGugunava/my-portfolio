@@ -25,20 +25,20 @@ const token = ref()
 const v$ = useVuelidate(formRules, form, { $lazy: true });
 
 
-async function verifyCaptcha(token: string): Promise<boolean> {
-  const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: new URLSearchParams({
-      response: token
-    })
-  })
+// async function verifyCaptcha(token: string): Promise<boolean> {
+//   const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/x-www-form-urlencoded"
+//     },
+//     body: new URLSearchParams({
+//       response: token
+//     })
+//   })
 
-  const data = await response.json()
-  return data.success === true
-}
+//   const data = await response.json()
+//   return data.success === true
+// }
 
 
 const resetForm = () => {
@@ -57,13 +57,13 @@ const submitForm = async () => {
 
   if (!valid) return;
 
-  const captchaToken = token.value;
+  // const captchaToken = token.value;
 
-  const verified = await verifyCaptcha(captchaToken)
+  // const verified = await verifyCaptcha(captchaToken)
 
-  if (!verified) {
-  throw new Error("CAPTCHA failed")
-  }
+  // if (!verified) {
+  // throw new Error("CAPTCHA failed")
+  // }
 
 
   try {
