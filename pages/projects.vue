@@ -25,7 +25,7 @@ const { data, error } = await useAsyncData(
     name,
     image,
     link,
-    technologies ( id, name )
+    technologies ( id, name, link )
   `).order('name', { ascending: true })
 )
 
@@ -95,7 +95,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="py-20">
+  <div class="py-20 overflow-x-hidden">
     <div class="container-fluid">
       <div class="mb-8 flex justify-between items-center">
         <div>
