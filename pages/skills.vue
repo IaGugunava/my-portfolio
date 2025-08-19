@@ -144,7 +144,7 @@ fetchSkills();
 
 <template>
   <div
-    class="skills-page mx-auto pb-20 relative h-[100dvh] overflow-y-hidden flex items-center justify-center"
+    class="skills-page mx-auto pb-20 relative h-[100dvh] overflow-hidden flex items-center justify-center"
   >
     <!-- <div class="container-fluid flex flex-col gap-8 justify-center items-center">
             <div v-for="item in skills" :key="item?.id">
