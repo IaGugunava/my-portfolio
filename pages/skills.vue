@@ -4,7 +4,7 @@ import * as d3 from "d3";
 const supabaseClient = useSupabaseClient();
 
 const skills = ref();
-const radius = 24;
+const radius = 12;
 const diameter = radius * 2;
 
 const svgWidth = ref(window?.innerWidth - 50);
@@ -34,13 +34,13 @@ const updateLines = () => {
 const runSimulation = async (skill: any, width: number, height: number) => {
   const nodes = skill.map((item: any) => ({
     ...item,
-    x: Math.max(radius, Math.min(width - radius, Math.random() * width)),
-    y: Math.max(radius, Math.min(height - radius, Math.random() * height)),
+    x: Math.max(radius * item.level, Math.min(width - radius * item.level, Math.random() * width)),
+    y: Math.max(radius * item.level, Math.min(height - radius * item.level, Math.random() * height)),
   }));
 
   const clampNodeToBounds = (node: any) => {
-    node.x = Math.max(radius, Math.min(width - radius, node.x));
-    node.y = Math.max(radius, Math.min(height - radius, node.y));
+    node.x = Math.max(radius * node.level, Math.min(width - radius * node.level, node.x));
+    node.y = Math.max(radius * node.level, Math.min(height - radius * node.level, node.y));
   };
 
 
@@ -50,7 +50,7 @@ const runSimulation = async (skill: any, width: number, height: number) => {
     .force("x", d3.forceX(width / 2).strength(0.02))
     .force("y", d3.forceY(height / 2).strength(0.02))
     .force("charge", d3.forceManyBody().strength(-400))
-    .force("collision", d3.forceCollide(radius + 2))
+    .force("collision", d3.forceCollide(radius * nodes.level + 2))
     .on("tick", () => {
       nodes.forEach(clampNodeToBounds);
     })
@@ -59,11 +59,11 @@ const runSimulation = async (skill: any, width: number, height: number) => {
   for (let i = 0; i < 300; i++) simulation.tick();
 
   nodes.forEach((node: any) => {
-    if (node.x < radius || node.x > width - radius) node.vx *= -1;
-    if (node.y < radius || node.y > height - radius) node.vy *= -1;
+    if (node.x < radius * node.level || node.x > width - radius * node.level) node.vx *= -1;
+    if (node.y < radius * node.level || node.y > height - radius * node.level) node.vy *= -1;
 
-    node.x = Math.max(radius, Math.min(width - radius, node.x));
-    node.y = Math.max(radius, Math.min(height - radius, node.y));
+    node.x = Math.max(radius * node.level, Math.min(width - radius * node.level, node.x));
+    node.y = Math.max(radius * node.level, Math.min(height - radius * node.level, node.y));
   });
 
   laidOutSkills.value = [...nodes];
@@ -102,13 +102,20 @@ const runSimulation = async (skill: any, width: number, height: number) => {
 };
 
 const fetchSkills = async () => {
-  const { data, error } = await supabaseClient.from("technologies").select("*");
+  // const { data, error } = await supabaseClient.from("technologies").select("*");
 
-  if (!error) {
-    skills.value = data;
-  } else {
-    console.log(error);
+  const { data, error } = await apiFetch("/technologies", {}, "technologies")
+
+  console.log(data.value)
+
+  if(error.value) {
+    console.log(error.value);
+    return;
   }
+
+  skills.value = data.value?.data
+
+  console.log(skills.value)
 };
 
 const handleResize = () => {
@@ -118,6 +125,8 @@ const handleResize = () => {
     runSimulation(skills.value, svgWidth.value, svgHeight.value);
   }
 };
+
+fetchSkills()
 
 onMounted(() => {
   window.addEventListener("resize", handleResize);
@@ -133,11 +142,11 @@ watch(
     if (n?.length) {
       runSimulation(n, svgWidth.value, svgHeight.value);
     }
+
   },
   { immediate: true }
 );
 
-fetchSkills();
 </script>
 
 <template>
@@ -168,10 +177,10 @@ fetchSkills();
         v-for="(item, index) in laidOutSkills"
         class="pointer-events-auto overflow-visible"
         :key="item.id"
-        :x="item.x - radius"
-        :y="item.y - radius"
-        :width="diameter"
-        :height="diameter"
+        :x="item.x - radius * item.level"
+        :y="item.y - radius * item.level"
+        :width="diameter * item.level"
+        :height="diameter * item.level"
         :ref="(el) => (nodeRefs[index] = el)"
       >
         <Pin :data="item" />

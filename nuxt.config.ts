@@ -33,7 +33,9 @@ export default defineNuxtConfig({
     public: {
       supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL,
       supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY,
-      turnstileKey: process.env.NUXT_PUBLIC_TURNSTILE_SITE_KEY
+      turnstileKey: process.env.NUXT_PUBLIC_TURNSTILE_SITE_KEY,
+      NUXT_PUBLIC_BASE_URL: process.env.NUXT_PUBLIC_BASE_URL,
+      NUXT_PUBLIC_WEBSITE_URL: process.env.NUXT_PUBLIC_WEBSITE_URL
     }
   },
   
