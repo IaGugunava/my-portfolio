@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
 
-const supabaseClient = useSupabaseClient();
+const { data, error } = await apiFetch("/technologies", {}, "skills")
 
-const skills: Ref<any> = computed(() => data?.value?.data?.slice(0, 12));
+const skills: Ref<any> = computed(() => error.value ? [] : shuffleArray(data?.value?.data?.slice(0, 12)));
 
-const { data, error } = await useAsyncData(
-  'skills',
-  async () => await supabaseClient.from('technologies').select('*')
-)
+function shuffleArray(array: any[]) {
+const shuffled = [...(array || [])];
+for (let i = shuffled.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+}
+return shuffled;
+}
+
 
 const animateElements = () => {
   const items = gsap.utils.toArray('.skill-item')

@@ -20,16 +20,7 @@ function updateShuffledList() {
   shuffledList.value = Array.isArray(projects.value) ? shuffleArray(projects.value) : [];
 }
 
-const { data, error } = await useAsyncData(
-  'projects',
-  async () => await supabaseClient.from("projects").select(`
-    id,
-    name,
-    image,
-    link,
-    technologies ( id, name )
-  `).order('name', { ascending: true })
-)
+const { data, error } = await apiFetch('/projects', {}, 'project')
 
 onMounted(async () => {
 

@@ -1,12 +1,25 @@
 <script setup lang="ts">
-import CusotmButton from '~/components/ui/CusotmButton.vue';
 import { gsap } from 'gsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
-const supabaseClient = useSupabaseClient();
+
+const route = useRoute()
+const router = useRouter()
 
 const itemRow = ref(3);
+const filteredLength = ref(0);
+
+const pagination = ref({
+  pageNumber: Number(route?.query?.page) || 1,
+  maxPages: 5,
+  perPage: 10,
+});
+
+const onClickHandler = (page: number) => {
+  router.push({ path: "/projects", query: { page: page } });
+};
+
 // const projectState = ref("all");
 // const chosenProjects = ref();
 const dataChunks: Ref<any[]> = ref([])
@@ -18,16 +31,18 @@ const projects: Ref<any> = computed(() => error !== null ? data?.value?.data : [
 //   otherProjects.value = projects.value.filter((el: any) => el.type === 'commercial');
 // }
 
-const { data, error } = await useAsyncData(
-  'projects',
-  async () => await supabaseClient.from("projects").select(`
-    id,
-    name,
-    image,
-    link,
-    technologies ( id, name, link )
-  `).order('name', { ascending: true })
-)
+const { data, error, execute } = await apiFetch('/projects', {}, 'projects')
+
+const getProjects = async () => {
+  await execute();
+
+  console.log(data.value)
+
+  sliceData()
+
+  // filteredLength.value = data
+}
+
 
 const sliceData = () => {
   for (let i = 0; i < projects?.value?.length; i += itemRow.value) {
@@ -35,35 +50,6 @@ const sliceData = () => {
     dataChunks.value.push(chunk);
   }
 }
-
-// const fetchProjects = async () => {
-//   const { data, error } = await supabaseClient.from("projects").select(`
-//     id,
-//     name,
-//     image,
-//     link,
-//     technologies ( id, name )
-//   `).order('name', { ascending: true });
-//   if (!error) {
-//     projects.value = data;
-//   } else {
-//     console.log(error);
-//   }
-
-//   for (let i = 0; i < projects?.value?.length; i += itemRow.value) {
-//     const chunk: any[] = projects.value?.slice(i, i + itemRow.value);
-//     dataChunks.value.push(chunk);
-//   }
-// };
-
-// fetchProjects();
-
-// watch(projectState, () => {
-//   projectState.value ? (chosenProjects.value = personalProjects.value) : (chosenProjects.value = otherProjects.value)
-// }, {
-//   immediate: true
-// })
-
 
 const animateElements = () => {
   const items = gsap.utils.toArray('.project-section')
@@ -85,7 +71,7 @@ const animateElements = () => {
 }
 
 onMounted(async () => {
-  sliceData()
+  await getProjects()
 
   await nextTick()
 
@@ -116,6 +102,17 @@ onMounted(async () => {
               <CustomCard class="w-full " :data="el" />
           </div>
         </div>
+    </div>
+
+    <div class="movies__paginate">
+      <VueAwesomePaginate
+        v-if="filteredLength! / pagination?.perPage > 1"
+        v-model="pagination.pageNumber"
+        :total-items="filteredLength"
+        :items-per-page="pagination.perPage"
+        :max-pages-shown="5"
+        @click="onClickHandler(pagination.pageNumber)"
+      />
     </div>
   </div>
 </template>
